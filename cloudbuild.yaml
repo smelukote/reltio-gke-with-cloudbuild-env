@@ -1,5 +1,5 @@
 # This step clones the hello-cloudbuild-env repository
-- name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/git'
   id: Clone env repository
   entrypoint: /bin/sh
   args:
@@ -20,14 +20,14 @@
      sed "s/COMMIT_SHA/${SHORT_SHA}/g" > hello-cloudbuild-env/kubernetes.yaml
 
 # This step pushes the manifest back to hello-cloudbuild-env
-- name: 'reltio-gke-with-cloufbuild-env'
+- name: 'gcr.io/cloud-builders/gcloud'
   id: Push manifest
   entrypoint: /bin/sh
   args:
   - '-c'
   - |
     set -x && \
-    cd reltio-gke-with-cloufbuild-env && \
+    cd hello-cloudbuild-env && \
     git add kubernetes.yaml && \
     git commit -m "Deploying image gcr.io/${PROJECT_ID}/hello-cloudbuild:${SHORT_SHA}
     Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
