@@ -1,5 +1,5 @@
 # This step clones the hello-cloudbuild-env repository
-- name: 'reltio-gke-with-cloufbuild-env'
+- name: 'gcr.io/cloud-builders/gcloud'
   id: Clone env repository
   entrypoint: /bin/sh
   args:
